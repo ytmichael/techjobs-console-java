@@ -75,13 +75,37 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
+            String loweraValue;
+            loweraValue = aValue.toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (loweraValue.contains(value)) {
                 jobs.add(row);
             }
         }
 
         return jobs;
+    }
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // load data, if not already loaded
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        for (HashMap<String, String> row : allJobs) {
+            for (String key: row.keySet()) {
+                String aValue = row.get(key);
+                String loweraValue;
+                loweraValue = aValue.toLowerCase();
+                if (loweraValue.contains(value)) {
+                    jobs.add(row);
+                }
+            }
+
+        }
+        System.out.println("Search term not found.");
+        return jobs;
+
     }
 
     /**
